@@ -5032,6 +5032,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 295,
 	},
+	spikescales: {
+		onDamagingHit(damage, target, source, move) {
+			const side = source.isAlly(target) ? source.side.foe : source.side;
+			const spikeLayers = side.sideConditions['spikes'];
+			if (move.category === 'Physical' && (!spikeLayers || spikeLayers.layers < 2)) {
+				this.add('-activate', target, 'ability: Spike Scales');
+				side.addSideCondition('spikes', target);
+			}
+		},
+		flags: {},
+		name: "Spike Scales",
+		rating: 3.5,
+		num: -101,
+	},
 	trace: {
 		onStart(pokemon) {
 			// n.b. only affects Hackmons
@@ -5384,6 +5398,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		flags: {},
 		name: "Weak Armor",
+		rating: 1,
+		num: 133,
+	},
+	efficiency: {
+		onPrepareHit(source, target, move) {
+			if (move.category === 'Status') {
+				if (source.getNature().plus === 'atk') {
+					this.boost({atk: 1});
+				}
+				if (source.getNature().plus === 'def') {
+					this.boost({def: 1});
+				}
+				if (source.getNature().plus === 'spa') {
+					this.boost({spa: 1});
+				}
+				if (source.getNature().plus === 'spd') {
+					this.boost({spd: 1});
+				}
+				if (source.getNature().plus === 'spe') {
+					this.boost({spe: 1});
+				}
+			}
+		},
+		flags: {},
+		name: "Efficiency",
 		rating: 1,
 		num: 133,
 	},
