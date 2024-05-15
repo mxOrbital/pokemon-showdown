@@ -5402,7 +5402,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 133,
 	},
 	efficiency: {
-		onPrepareHit(source, target, move) {
+		onAfterMoveSecondary(source, target, move) {
 			if (move.category === 'Status') {
 				if (source.getNature().plus === 'atk') {
 					this.boost({atk: 1});
