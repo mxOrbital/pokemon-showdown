@@ -41,10 +41,10 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 0,
 	},
 	versatility: {
-		onSwitchIn(pokemon, source, move) {
+		onSwitchIn(move, pokemon) {
 			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 			const type2 = pokemon.hpType;
-			if (move.name === 'hiddenpower') {
+			if (move.id === 'hiddenpower') {
 				if (pokemon.hasType(type2)) return false;
 				if (!pokemon.addType(type2)) return false;
 				this.add('-start', pokemon, 'typeadd', type2);
