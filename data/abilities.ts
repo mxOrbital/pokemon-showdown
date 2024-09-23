@@ -55,7 +55,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			}
 		},
 		flags: {},
-		name: "camouflage",
+		name: "Camouflage",
 		rating: 0.1,
 		num: -100,
 	},
