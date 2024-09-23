@@ -45,7 +45,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 			const type2 = pokemon.hpType;
 			for (const move of pokemon.moveSlots[0].id) {
-				if (move.id === 'hiddenpower') {
+				if (move === 'hiddenpower') {
 					if (pokemon.hasType(type2)) return false;
 					if (!pokemon.addType(type2)) return false;
 					this.add('-start', pokemon, 'typeadd', type2);
