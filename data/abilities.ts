@@ -41,17 +41,19 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 0,
 	},
 	versatility: {
-		onSwitchIn(target, source, move) {
-			const type = this.dex.moves.get(target.moveSlots[0].id).type;
-			const type2 = target.hpType;
-			if (move.id === 'hiddenpower') {
-				if (target.hasType(type2)) return false;
-				if (!target.addType(type2)) return false;
-				this.add('-start', target, 'typeadd', type2);
-			} else {
-				if (target.hasType(type)) return false;
-				if (!target.addType(type)) return false;
-				this.add('-start', target, 'typeadd', type);
+		onSwitchIn(pokemon) {
+			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
+			const type2 = pokemon.hpType;
+			for (const MOVE of pokemon.moveSlots[0].id) {
+				if (move.id === 'hiddenpower') {
+					if (pokemon.hasType(type2)) return false;
+					if (!pokemon.addType(type2)) return false;
+					this.add('-start', pokemon, 'typeadd', type2);
+				} else {
+					if (pokemon.hasType(type)) return false;
+					if (!pokemon.addType(type)) return false;
+					this.add('-start', pokemon, 'typeadd', type);
+				}
 			}
 		},
 		flags: {},
