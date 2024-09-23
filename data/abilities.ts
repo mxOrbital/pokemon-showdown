@@ -40,6 +40,25 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 0.1,
 		num: 0,
 	},
+	camouflage: {
+		onSwitchIn(target, move) {
+			const type = this.dex.moves.get(target.moveSlots[0].id).type;
+			const type2 = target.hpType;
+			if move.id === 'hiddenpower' {
+				if (target.hasType(type)) return false;
+				if (!target.addType(type)) return false;
+				this.add('-start', target, 'typeadd', type);
+			} else {
+				if (target.hasType(type2)) return false;
+				if (!target.addType(type2)) return false;
+				this.add('-start', target, 'typeadd', type2);
+			}
+		},
+		flags: {},
+		name: "camouflage",
+		rating: 0.1,
+		num: -100,
+	},
 	adaptability: {
 		onModifySTAB(stab, source, target, move) {
 			if (move.forceSTAB || source.hasType(move.type)) {
