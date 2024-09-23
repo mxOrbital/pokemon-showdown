@@ -40,7 +40,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 0.1,
 		num: 0,
 	},
-	camouflage: {
+	versatility: {
 		onSwitchIn(target, move) {
 			const type = this.dex.moves.get(target.moveSlots[0].id).type;
 			const type2 = target.hpType;
@@ -55,7 +55,7 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 			}
 		},
 		flags: {},
-		name: "Camouflage",
+		name: "Versatility",
 		rating: 0.1,
 		num: -100,
 	},
