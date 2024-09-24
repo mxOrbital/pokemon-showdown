@@ -41,8 +41,8 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		num: 0,
 	},
 	versatility: {
-		onModifyTypePriority: -5,
-		onModifyType(move, pokemon) {
+		onModifyMovePriority: -5,
+		onModifyMove(move, pokemon) {
 			if (move.id === 'hiddenpower') {
 				move.type = pokemon.hpType || 'Dark';
 			}
