@@ -58,7 +58,19 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		flags: {},
 		name: "Versatility",
 		rating: 0.1,
-		num: -100,
+		num: 0,
+	},
+	disturbance: {
+		onStart(pokemon) {
+			let activated = false;
+			for (const target of pokemon.adjacentFoes()) {
+				this.boost({spa: -1}, target, pokemon, null, true);
+			}
+		},
+		flags: {},
+		name: "Disturbance",
+		rating: 0.1,
+		num: 0,
 	},
 	adaptability: {
 		onModifySTAB(stab, source, target, move) {
