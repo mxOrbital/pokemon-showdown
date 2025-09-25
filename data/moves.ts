@@ -489,25 +489,23 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: { snatch: 1, metronome: 1 },
-		pseudoWeather: 'aquaring',
+		volatileStatus: 'aquaring',
 		condition: {
-			duration: 0, // Infinite duration
-			onFieldStart(target, source) {
-				this.add('-fieldstart', 'move: Aqua Ring', `[of] ${source}`);
-				// Store the unique ID and side ID of the Pokémon that used the move
-				this.effectState.sourceId = source.toString();
-				this.effectState.sourceSideId = source.side.id;
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Aqua Ring');
 			},
 			onResidualOrder: 6,
-			onResidual() {
-				for (const pokemon of this.getAllActive()) {
-					// Only heal if it's both the same Pokémon AND on the same team
-					if (pokemon.toString() === this.effectState.sourceId && 
-						pokemon.side.id === this.effectState.sourceSideId) {
-						this.heal(pokemon.baseMaxhp / 16, pokemon);
-					}
-				}
+			onResidual(pokemon) {
+				this.heal(pokemon.baseMaxhp / 16);
 			},
+			// These ensure the effect persists through switching
+			noCopy: true,
+			onSwitchOut(pokemon) {
+				pokemon.addVolatile('aquaring');
+			},
+			onDragOut(pokemon) {
+				pokemon.addVolatile('aquaring');
+			}
 		},
 		secondary: null,
 		target: "self",
