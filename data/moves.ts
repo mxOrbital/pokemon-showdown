@@ -494,12 +494,16 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			duration: 0, // Infinite duration
 			onFieldStart(target, source) {
 				this.add('-fieldstart', 'move: Aqua Ring', `[of] ${source}`);
-				this.effectState.sourcePosition = source.position;
+				// Store the unique ID and side ID of the Pokémon that used the move
+				this.effectState.sourceId = source.toString();
+				this.effectState.sourceSideId = source.side.id;
 			},
 			onResidualOrder: 6,
 			onResidual() {
 				for (const pokemon of this.getAllActive()) {
-					if (pokemon.position === this.effectState.sourcePosition) {
+					// Only heal if it's both the same Pokémon AND on the same team
+					if (pokemon.toString() === this.effectState.sourceId && 
+						pokemon.side.id === this.effectState.sourceSideId) {
 						this.heal(pokemon.baseMaxhp / 16, pokemon);
 					}
 				}
