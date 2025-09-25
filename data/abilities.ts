@@ -5627,4 +5627,53 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -3,
 	},
+	immanence: {
+			onSwitchIn(pokemon) {
+			const lastSlot = pokemon.moveSlots?.[pokemon.moveSlots.length - 1];
+			const moveId = lastSlot?.id;
+			const move = moveId ? this.dex.moves.get(moveId) : null;
+			// Exclude Status moves that inflict a status condition and Protect/Detect/other shields
+				if (
+					move &&
+					move.category === 'Status' &&
+					!move.status &&
+					move.id !== 'protect' &&
+					move.id !== 'detect' &&
+					move.id !== 'endure' &&
+					move.id !== 'kingsshield' &&
+					move.id !== 'spikyshield' &&
+					move.id !== 'banefulbunker' &&
+					move.id !== 'obstruct' &&
+					move.id !== 'swagger' &&
+					move.id !== 'batonpass' &&
+					move.id !== 'partingshot' &&
+					move.id !== 'roar' &&
+					move.id !== 'whirlwind' &&
+					move.id !== 'encore' &&
+					move.id !== 'substitute' &&
+					move.id !== 'attract' &&
+					move.id !== 'rest' &&
+					move.id !== 'block' &&
+					move.id !== 'doubleteam' &&
+					move.id !== 'skillswap' &&
+					move.id !== 'wideguard' &&
+					move.id !== 'quickguard' &&
+					move.id !== 'matblock' &&
+					move.id !== 'snatch' &&
+					move.id !== 'sleeptalk' &&
+					move.id !== 'mimic' &&
+					move.id !== 'copycat' &&
+					move.id !== 'metronome' &&
+					move.id !== 'spiderweb' &&
+					!move.isZ &&
+					!move.isMax
+					) {
+						this.actions.useMove(moveId, pokemon);
+					}
+				},
+		flags: {},
+		name: "Immanence",
+		rating: 3,
+		num: -1000,
+	},
 };
