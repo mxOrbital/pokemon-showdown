@@ -489,14 +489,20 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 20,
 		priority: 0,
 		flags: { snatch: 1, metronome: 1 },
-		volatileStatus: 'aquaring',
+		pseudoWeather: 'aquaring',
 		condition: {
-			onStart(pokemon) {
-				this.add('-start', pokemon, 'Aqua Ring');
+			duration: 0, // Infinite duration
+			onFieldStart(target, source) {
+				this.add('-fieldstart', 'move: Aqua Ring', `[of] ${source}`);
+				this.effectState.sourcePosition = source.position;
 			},
 			onResidualOrder: 6,
-			onResidual(pokemon) {
-				this.heal(pokemon.baseMaxhp / 16);
+			onResidual() {
+				for (const pokemon of this.getAllActive()) {
+					if (pokemon.position === this.effectState.sourcePosition) {
+						this.heal(pokemon.baseMaxhp / 16, pokemon);
+					}
+				}
 			},
 		},
 		secondary: null,
@@ -505,6 +511,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		zMove: { boost: { def: 1 } },
 		contestType: "Beautiful",
 	},
+
 	aquastep: {
 		num: 872,
 		accuracy: 100,
@@ -10616,42 +10623,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Grass",
 		zMove: { effect: 'clearnegativeboost' },
 		contestType: "Clever",
-	},
-	vineleash: {
-		num: 9999,
-		accuracy: 100,
-		basePower: 90,
-		category: "Special",
-		name: "Vineleash",
-		pp: 10,
-		priority: 0,
-		flags: { contact: 1, protect: 1, mirror: 1, reflectable: 1, metronome: 1 },
-		volatileStatus: 'leashed',
-		condition: {
-			duration: 5,
-			onStart(target) {
-				this.add('-start', target, 'move: Vineleash');
-			},
-			onEnd(target) {
-				this.add('-end', target, 'move: Vineleash');
-			},
-			onModifyAtkPriority: 5,
-			onModifyAtk(atk) {
-				return this.chainModify(2/3);
-			},
-			onModifySpAPriority: 5,
-			onModifySpA(spa) {
-				return this.chainModify(2/3);
-			},
-			onResidualOrder: 8,
-			onResidual(pokemon) {
-				this.damage(pokemon.baseMaxhp / 16);
-			}
-		},
-		secondary: null,
-		target: "normal",
-		type: "Grass",
-		contestType: "Cool",
 	},
 	leer: {
 		num: 43,
