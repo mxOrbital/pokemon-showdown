@@ -10617,6 +10617,42 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		zMove: { effect: 'clearnegativeboost' },
 		contestType: "Clever",
 	},
+	vineleash: {
+		num: 9999,
+		accuracy: 100,
+		basePower: 90,
+		category: "Special",
+		name: "Vineleash",
+		pp: 10,
+		priority: 0,
+		flags: { contact: 1, protect: 1, mirror: 1, reflectable: 1, metronome: 1 },
+		volatileStatus: 'leashed',
+		condition: {
+			duration: 5,
+			onStart(target) {
+				this.add('-start', target, 'move: Vineleash');
+			},
+			onEnd(target) {
+				this.add('-end', target, 'move: Vineleash');
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk) {
+				return this.chainModify(2/3);
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(spa) {
+				return this.chainModify(2/3);
+			},
+			onResidualOrder: 8,
+			onResidual(pokemon) {
+				this.damage(pokemon.baseMaxhp / 16);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Grass",
+		contestType: "Cool",
+	},
 	leer: {
 		num: 43,
 		accuracy: 100,
