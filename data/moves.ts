@@ -498,14 +498,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			onResidual(pokemon) {
 				this.heal(pokemon.baseMaxhp / 16);
 			},
-			// These ensure the effect persists through switching
-			noCopy: true,
-			onSwitchOut(pokemon) {
-				pokemon.addVolatile('aquaring');
-			},
-			onDragOut(pokemon) {
-				pokemon.addVolatile('aquaring');
-			}
 		},
 		secondary: null,
 		target: "self",
@@ -513,7 +505,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		zMove: { boost: { def: 1 } },
 		contestType: "Beautiful",
 	},
-
+	
 	aquastep: {
 		num: 872,
 		accuracy: 100,
