@@ -6343,9 +6343,10 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		},
 		onSwitchIn(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
-				const type = pokemon.hpType;
-				if (pokemon.hasType(type)) return false;
-				if (!pokemon.addType(type)) return false;
+				const type = pokemon.hpType || 'Dark';
+				if (!pokemon.hasType(type)) {
+					pokemon.addType(type);
+				}
 			}
 			// Boost stat based on nature
 			const naturePlus = pokemon.getNature().plus;
