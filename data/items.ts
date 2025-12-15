@@ -6341,7 +6341,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
-		onSwitchIn(pokemon) {
+		onStart(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
 				const type = pokemon.hpType || 'Dark';
 				if (!pokemon.hasType(type)) {

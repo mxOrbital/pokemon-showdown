@@ -2369,6 +2369,10 @@ export const ItemsText: { [id: IDEntry]: ItemText } = {
 		name: "Unremarkable Teacup",
 		shortDesc: "Evolves Poltchageist into Sinistcha when used.",
 	},
+	unstableslime: {
+		name: "Unstable Slime",
+		shortDesc: "On switch in, Adds Weezing's HP type & Raises stat of positive nature by 1 stage.",
+	},
 	upgrade: {
 		name: "Up-Grade",
 		shortDesc: "Evolves Porygon into Porygon2 when traded.",
