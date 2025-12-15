@@ -6345,7 +6345,9 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
 				const type = pokemon.hpType || 'Dark';
 				if (!pokemon.hasType(type)) {
-					pokemon.addType(type);
+					if (pokemon.addType(type)) {
+						this.add('-start', pokemon, 'typeadd', type, '[from] item: Unstable Slime');
+					}
 				}
 			}
 			// Boost stat based on nature
