@@ -2371,7 +2371,7 @@ export const ItemsText: { [id: IDEntry]: ItemText } = {
 	},
 	unstableslime: {
 		name: "Unstable Slime",
-		shortDesc: "On switch in, Adds Weezing's HP type & Raises stat of positive nature by 1 stage.",
+		shortDesc: "On switch in, Adds Weezing's HP type & Raises all stats of effected by nature 1 stage.",
 	},
 	upgrade: {
 		name: "Up-Grade",

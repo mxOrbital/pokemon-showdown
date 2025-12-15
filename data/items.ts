@@ -6355,6 +6355,10 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 			if (naturePlus) {
 				this.boost({ [naturePlus]: 1 }, pokemon);
 			}
+			const natureMinus = pokemon.getNature().minus;
+			if (natureMinus) {
+				this.boost({ [natureMinus]: 1 }, pokemon);
+			}
 		},
 		onResidual(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
