@@ -6335,6 +6335,32 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		num: 80,
 		gen: 2,
 	},
+	unstableslime: {
+		name: "Unstable Slime",
+		spritenum: 0,
+		fling: {
+			basePower: 30,
+		},
+		onSwitchIn(target) {
+			if (target.isActive && target.baseSpecies.name === 'Weezing') {
+				const type = target.hpType;
+				if (target.hasType(type)) return false;
+				if (!target.addType(type)) return false;
+			}
+			// Boost stat based on nature
+			const naturePlus = target.getNature().plus;
+			if (naturePlus) {
+				this.boost({ [naturePlus]: 1 }, target);
+			}
+		},
+		onResidual(pokemon) {
+			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
+				this.heal(pokemon.baseMaxhp / 8);
+			}
+		},
+		num: -1,
+		gen: 4,
+	},
 	swampertite: {
 		name: "Swampertite",
 		spritenum: 612,
