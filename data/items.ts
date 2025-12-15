@@ -6361,6 +6361,10 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 				this.heal(pokemon.baseMaxhp / 8);
 			}
 		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Weezing') return false;
+			return true;
+		},
 		itemUser: ["Weezing"],
 		num: -1,
 		gen: 4,
