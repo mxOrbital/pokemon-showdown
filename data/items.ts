@@ -6341,16 +6341,16 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
-		onSwitchIn(target) {
-			if (target.isActive && target.baseSpecies.name === 'Weezing') {
-				const type = target.hpType;
-				if (target.hasType(type)) return false;
-				if (!target.addType(type)) return false;
+		onSwitchIn(pokemon) {
+			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
+				const type = pokemon.hpType;
+				if (pokemon.hasType(type)) return false;
+				if (!pokemon.addType(type)) return false;
 			}
 			// Boost stat based on nature
-			const naturePlus = target.getNature().plus;
+			const naturePlus = pokemon.getNature().plus;
 			if (naturePlus) {
-				this.boost({ [naturePlus]: 1 }, target);
+				this.boost({ [naturePlus]: 1 }, pokemon);
 			}
 		},
 		onResidual(pokemon) {
@@ -6358,6 +6358,7 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 				this.heal(pokemon.baseMaxhp / 8);
 			}
 		},
+		itemUser: ["Weezing"],
 		num: -1,
 		gen: 4,
 	},
