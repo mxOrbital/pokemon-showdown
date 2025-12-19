@@ -6341,6 +6341,12 @@ export const Items: import('../sim/dex-items').ItemDataTable = {
 		fling: {
 			basePower: 30,
 		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move.id === 'hiddenpower') {
+				return this.chainModify([1.5, 1]);
+			}
+		},
 		onStart(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Weezing') {
 				const type = pokemon.hpType || 'Dark';
